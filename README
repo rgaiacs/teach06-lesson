@@ -2,3 +2,35 @@ This is my final project for the 6th class of Software Carpentry Instructors.
 
 Here you will find all the files that I used for my "Git: solving conflicts"
 lesson.
+
+Greg Wilson has a nice video (licensed under CC-BY) about solving conflicts for
+svn at http://software-carpentry.org/v4/vc/conflict.html. I like so much the
+story of Wolfman and Dracula that I will use it.
+
+## Public
+
+I planned this lesson for someone that have at least 10 hours of practice with
+git (let say working two hours for five days in some project that use git for
+version control).
+
+## Summary
+
+Wolfman and Dracula are working in a repository from Mummy that pretty print one
+CSV file in the terminal.
+
+Mummy use ONLY Python2, Dracula use ONLY Python3 and Wolfman use both.
+
+## Setup
+
+Run
+
+    $ ./setup
+
+It will two new directories: `dracula` and `wolfman` that are the working
+directory of Dracula and Wolfman, respectively.
+
+Open two terminals. In the first one go to `dracula` and type
+
+    $ source bashrc
+
+And in the second one go to `wolfman` and type the same command.
