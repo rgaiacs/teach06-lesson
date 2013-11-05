@@ -1,0 +1,2 @@
+PS1='[dracula]\$ '
+alias python=python3

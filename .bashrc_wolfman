@@ -1,0 +1,2 @@
+PS1='[wolfman]\$ '
+alias python=python2
