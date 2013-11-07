@@ -18,7 +18,8 @@ version control).
 Wolfman and Dracula are working in a repository from Mummy that pretty print one
 CSV file in the terminal.
 
-Mummy use ONLY Python2, Dracula use ONLY Python3 and Wolfman use both.
+Mummy use ONLY Python2, Dracula use ONLY Python3 and Wolfman use both (during
+the lesson Dracula convinced Wolfman to use Python3).
 
 ## Setup
 
