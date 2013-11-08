@@ -11,9 +11,117 @@ story of Wolfman and Dracula that I will use it.
 
 I planned this lesson for someone that have at least 10 hours of practice with
 git (let say working two hours for five days in some project that use git for
-version control).
+version control) because I will not explain what some basic commands do.
+
+I hope that it can be use in a bootcamp for folks that just discovery git as well.
 
 ## Summary
+
+In the first part I show how to merge local branches (10 minutes) and in the
+second part how to merge remote branches (10 minutes).
+
+## 1st part
+
+NOTE: This part had a problem because it can produce some misundestanding.
+
+Create a folder and init a git repository.
+
+    $ mkdir lesson
+    $ cd lesson
+    $ git init
+
+Create a file `hello` that will store "Hello world" in some languages.
+
+    $ touch hello
+    $ git add hello
+    $ git commit -m 'Add file'
+
+Show git log.
+
+    $ git log
+
+Show git tree with
+
+    $ git log --oneline --graphh --decorate --all --color
+
+or
+
+    $ git log --abbrev-commit --graph --decorate --all --color
+
+Create a alias for the last command.
+
+    $ git config --add alias.graph "log --oneline --graphh --decorate --all --color"
+
+or
+
+    $ git config --add alias.graph "log --abbrev-commit --graph --decorate --all --color"
+
+Show that the alias work.
+
+    $ git graph
+
+Create at least three branches.
+
+    $ git checkout -b pt
+    $ git checkout -b es
+    $ git checkout -b en
+    $ git graph
+
+Add `en: Hello world` to the file `hello` and commit the change.
+
+    $ git add hello
+    $ git commit -m 'Add english'
+    $ git graph
+
+Go to `es` branch.
+
+    $ git checkout es
+
+Add `es: Holla mundo` to the file `hello` and commit the change.
+
+    $ git add hello
+    $ git commit -m 'Add spanish'
+    $ git graph
+
+Go to `master` branch and merge it with `en`.
+
+    $ git checkout master
+    $ git graph
+    $ git merge en
+    $ git graph
+
+Try to merge it with `es`.
+
+    $ git merge es
+
+Solve the conflict (see `git-merge` manual page) and finish the merge.
+
+    $ git add hello
+    $ git commit -m 'Merge master and es'
+    $ git graph
+
+Go to `pt` branch.
+
+    $ git checkout pt
+
+Add `pt: Olá mundo` to the file `hello` and commit the change.
+
+    $ git add hello
+    $ git commit
+    $ git graph
+
+Got to `master` branch and try to merge with `pt`.
+
+    $ git checkout master
+    $ git merge pt
+
+Solve the conflict and finish the merge.
+
+    $ git add hello
+    $ git commit -m 'Merge master and pt'
+    $ git graph
+
+## 2nd part
 
 Wolfman and Dracula are working in a repository from Mummy that pretty print one
 CSV file in the terminal.
@@ -21,17 +129,77 @@ CSV file in the terminal.
 Mummy use ONLY Python2, Dracula use ONLY Python3 and Wolfman use both (during
 the lesson Dracula convinced Wolfman to use Python3).
 
-## Setup
+Clone the this repository.
 
-Run
+    $ git clone https://github.com/r-gaia-cs/teach06-lesson.git
 
+Go to the repository and run `setup.sh` that will run some commands the prepare
+the directory for the lesson.
+
+    $ cd teach06-lesson
     $ ./setup
 
-It will two new directories: `dracula` and `wolfman` that are the working
-directory of Dracula and Wolfman, respectively.
+One directory for Dracula and another for Wolfman can be find in the root of
+the repository.
 
-Open two terminals. In the first one go to `dracula` and type
+Open two terminals (or use screen/tmux). In the first one go to `dracula` and type
 
     $ source bashrc
 
 And in the second one go to `wolfman` and type the same command.
+
+For Dracula, show the state of the git tree (using the same alias of the first part)
+try to run the script.
+
+    $ git graph
+    $ python csv2console.py
+
+A erro message will be show. Open the script and change the print statement
+for print function. Try to run the script again if it work, commit the changes.
+
+    $ git add csv2console.py
+    $ git commit -m 'Porting to Python3'
+
+Push the changes for the remote repository.
+
+    $ git push origin master
+    $ git graph
+
+After work with Dracula, let work with Wolfman. Show the state of the git tree (using the
+same alias of the first part) try to run the script.
+
+    $ git graph
+    $ python csv2console.py
+    No input file.
+    $ python csv2console.py sample.csv 
+    Name     Orbital Radius Orbital Period Mass   Radius 
+    Amalthea 181.4          0.498179       0.075  131    
+    Io       421.6          1.769138       893.2  1821.6 
+    Europa   670.9          3.551181       480.0  1560.8 
+    Ganymede 1070.4         7.154553       1481.9 2631.2 
+    Callisto 1882.7         16.689018      1075.9 2410.3 
+    Himalia  11460          250.5662       0.095  85.0   
+    Elara    11740          259.6528       0.008  40.0
+
+Improve the output, test it and commit the changes.
+
+    $ git add csv2console.py
+    $ git commit -m 'Improve script'
+
+Try to push the changes.
+
+    $ git push origin master
+
+Fetch the remote repository and try to merge the master branch with the remote one.
+
+    $ git fetch origin
+    $ git merge origin/master
+
+Solve the conflicts (let port Wolfman's change to Python3) and commit the changes.
+
+    $ git add csv2console.py
+    $ git commit -m 'Merge keeping Python3'
+
+Push the changes.
+
+    $ git push origin master
