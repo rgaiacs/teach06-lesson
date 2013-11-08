@@ -42,7 +42,7 @@ Show git log.
 
 Show git tree with
 
-    $ git log --oneline --graphh --decorate --all --color
+    $ git log --oneline --graph --decorate --all --color
 
 or
 
@@ -50,7 +50,7 @@ or
 
 Create a alias for the last command.
 
-    $ git config --add alias.graph "log --oneline --graphh --decorate --all --color"
+    $ git config --add alias.graph "log --oneline --graph --decorate --all --color"
 
 or
 
